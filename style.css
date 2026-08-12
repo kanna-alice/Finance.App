@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('https://i.pinimg.com/736x/06/91/48/069148be557be3be773d328f350083ea.jpg');
+    background-color: cadetblue;
     background-size: cover;
     background-position: center;
 
@@ -59,4 +59,10 @@ button {
     align-items: center;
     padding: auto;
     display: none;
+}
+label {
+    display: block;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 4px;
 }

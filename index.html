@@ -8,12 +8,21 @@
 </head>
 <body>
     <div class="container">
-        <h1>Controle de Finanças</h1>
-        <p> <input type="text" id="searchInput" placeholder="Pesquisar..."><button id="searchButton">Pesquisar</button>  <button id="button_Menu" onclick="Menu()">Abrir Menu</button>
+        <h2>Finance.App</h2>
+        <p> <label for="searchInput">Pesquisar conta</label><input type="text"  id="searchInput" placeholder="Pesquisar..." ><button id="searchButton">Pesquisar</button>  <button id="button_Menu" onclick="Menu()">Abrir Menu</button>
             <div id="Add">
-                <h1>Adicionar Conta</h1> <p><button onclick="Menu()">Fechar</button></p>
-                <input id="input_Add" placeholder="Informe o que deseja adicionar"></input><button id="button_Add" onclick="Adicionar()">Adicionar</button>
-            </div>
+    <h2>Adicionar Conta</h2>
+    <p><button onclick="Menu()">Fechar</button></p>
+
+    <input type="text" id="input_Nome" placeholder="Ex: Salário, Uber..."> 
+    <input id="input_Valor" type="number" placeholder="Valor">
+    <input id="input_Categoria" type="text" placeholder="Categoria">
+    <input type="text" id="input_Desc" placeholder="Descrição">
+
+    <!-- 💭 sua vez: cria os outros 3 aqui embaixo, seguindo esse mesmo padrão -->
+
+    <button id="button_Add" onclick="Adicionar()">Adicionar</button>
+</div>
         </div>
     <div class="container_finance">
         <table id="financeTable">
