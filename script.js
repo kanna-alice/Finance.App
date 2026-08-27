@@ -20,30 +20,23 @@ function Adicionar() {
   ) {
     alert("digite algo nos inputs");
     return;
-  } 
-  if(indiceEditando === null){
-    contas.push(Novaconta)
   }
-  else {
-    contas[indiceEditando] = Novaconta
-    indiceEditando = null 
+
+  if (indiceEditando === null) {
+    contas.push(Novaconta);
+  } else {
+    contas[indiceEditando] = Novaconta;
+    indiceEditando = null;
   }
-    Salvar();
-    alert("Contas adicionadas com sucesso");
-    Salvar();
-    document.getElementById("input_Nome").value = "";
-    document.getElementById("input_Valor").value = "";
-    document.getElementById("input_Desc").value = "";
-    document.getElementById("input_Categoria").value = "";
-    document.getElementById("Add").style.display = "none";
-    console.log(contas);
-    renderizarContas();
-    if (indiceEditando === null) {
-      contas.push(Novaconta);
-    } else {
-      contas[indiceEditando] = Novaconta; // substitui o item antigo pelo novo
-      indiceEditando = null; // 💭 por que resetar aqui é importante?
-    }
+  Salvar();
+  alert("Contas adicionadas com sucesso");
+  document.getElementById("input_Nome").value = "";
+  document.getElementById("input_Valor").value = "";
+  document.getElementById("input_Desc").value = "";
+  document.getElementById("input_Categoria").value = "";
+  document.getElementById("Add").style.display = "none";
+  console.log(contas);
+  renderizarContas();
 }
 function renderizarContas() {
   let html = "";
@@ -55,17 +48,26 @@ function renderizarContas() {
         <td>${conta.Nome}</td>
         <td>${conta.Descricao}</td>
         <td>${conta.Categoria}</td>
-        <td>${conta.Valor}</td>
+        <td>${"R$: " + conta.Valor}</td>
         <td><button onclick="Editar(${index})">Editar</button></td>
+        <td><button onclick="Remover(${index})">Remover</button></td>
         </tr>
       
     `;
-    let res = document.getElementById("res");
     total = Number(total) + Number(conta.Valor);
-    res.textContent = `R$: ${total}`;
   });
+  let res = document.getElementById("res");
+  res.textContent = `R$: ${total}`;
   document.getElementById("financeTableBody").innerHTML = html;
 }
+function Remover(index) {
+  if (confirm("Remover esta conta?")) {
+    contas.splice(index, 1);
+    Salvar();
+    renderizarContas();
+  }
+}
+
 function Salvar() {
   localStorage.setItem("contas", JSON.stringify(contas));
 }

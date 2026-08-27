@@ -17,6 +17,7 @@ div.container {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     align-items: center;
 }
+
 div.container_finance {
     width: 90%;
     margin: 0 auto;
@@ -45,6 +46,15 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+button[onclick^="Editar"] {
+  background: #4CAF50;
+  color: white;
+}
+
+button[onclick^="Remover"] {
+  background: #f44336;
+  color: white;
 }
 #Add {
     width: 85%;
