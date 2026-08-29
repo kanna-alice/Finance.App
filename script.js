@@ -1,5 +1,6 @@
 const contas = JSON.parse(localStorage.getItem("contas")) || [];
 let indiceEditando = null;
+
 function Adicionar() {
   let input_Nome = document.getElementById("input_Nome").value;
   let input_Valor = document.getElementById("input_Valor").value;
@@ -36,23 +37,22 @@ function Adicionar() {
   document.getElementById("input_Categoria").value = "";
   document.getElementById("Add").style.display = "none";
   console.log(contas);
-  renderizarContas();
+  renderizarContas(contas);
 }
-function renderizarContas() {
+
+function renderizarContas(contasParaMostrar) {
   let html = "";
   let total = 0;
-  contas.forEach((conta, index) => {
+  contasParaMostrar.forEach((conta, index) => {
     html += `
-      
-    <tr>
+      <tr>
         <td>${conta.Nome}</td>
         <td>${conta.Descricao}</td>
         <td>${conta.Categoria}</td>
         <td>${"R$: " + conta.Valor}</td>
         <td><button onclick="Editar(${index})">Editar</button></td>
         <td><button onclick="Remover(${index})">Remover</button></td>
-        </tr>
-      
+      </tr>
     `;
     total = Number(total) + Number(conta.Valor);
   });
@@ -60,17 +60,19 @@ function renderizarContas() {
   res.textContent = `R$: ${total}`;
   document.getElementById("financeTableBody").innerHTML = html;
 }
+
 function Remover(index) {
   if (confirm("Remover esta conta?")) {
     contas.splice(index, 1);
     Salvar();
-    renderizarContas();
+    renderizarContas(contas);
   }
 }
 
 function Salvar() {
   localStorage.setItem("contas", JSON.stringify(contas));
 }
+
 function Menu() {
   const Menu = document.getElementById("Add");
   if (Menu.style.display === "block") {
@@ -79,6 +81,7 @@ function Menu() {
     Menu.style.display = "block";
   }
 }
+
 function Editar(index) {
   const conta = contas[index];
   indiceEditando = index;
@@ -86,8 +89,22 @@ function Editar(index) {
   document.getElementById("input_Desc").value = conta.Descricao;
   document.getElementById("input_Categoria").value = conta.Categoria;
   document.getElementById("input_Valor").value = conta.Valor;
-  // 💭 sua vez: preenche os outros 3 campos (Valor, Descricao, Categoria) do mesmo jeito
-
   document.getElementById("Add").style.display = "block";
 }
-window.addEventListener("DOMContentLoaded", renderizarContas);
+
+function buscar() {
+  const termo = document.getElementById("searchInput").value;
+  
+  if (termo === "") {
+    renderizarContas(contas);
+    return;
+  }
+  
+  const resultados = contas.filter(conta => {
+    return conta.Nome.toLowerCase().includes(termo.toLowerCase());
+  });
+  
+  renderizarContas(resultados);
+}
+
+window.addEventListener("DOMContentLoaded", () => renderizarContas(contas));
